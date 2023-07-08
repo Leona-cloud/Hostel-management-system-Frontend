@@ -11,8 +11,8 @@ const RegisterCont1 = () => {
         <h2 className=' text-sm font-bold'>Tell us more about you</h2>
         <p className= 'text-sm'>Your information is secure.</p>
         <br/>
-        <div className='flex flex-col justify-left'>
-          <input  placeholder= 'picture' className='border p-0.5' type= "file" name='Picture' />
+        <div >
+          <input  placeholder= 'picture' className='box-border h-32 w-32 p-4 border-4 ... object-fill' type= "file" name='Picture' />
         </div>
         <div className='flex flex-col py-1'>
           <label>FullName</label>
