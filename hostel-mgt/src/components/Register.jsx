@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Register = () => {
   return (
@@ -23,9 +24,9 @@ const Register = () => {
           <label>Password</label>
           <input className='border p-2' type="password" />
         </div>
-        <div className='flex justify-center text-black py-2'>
-          
-          <p>Already have an account? <a className = 'text-orange-500' href='/'>Sign in</a></p>
+        <div className='flex justify-between text-black py-2'>
+          <p>Already have an account? </p>
+          <Link className='text-orange-500' href = '/'><p><u>Sign in</u></p></Link>
         </div>
         <button className='border w-full my-5 py-2 bg-black text-white hover:bg-slate-400 '>Next</button>
       </form>
