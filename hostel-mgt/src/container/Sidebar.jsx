@@ -14,7 +14,7 @@ const Sidebar = () => {
         <Link to= "/dashboard/overview" className=' hover:text-[#EC8736]' > <li className='text-sm flex items-center justify-between' >Overview <span>+</span></li></Link>
         <Link to= "/dashboard/profile" className=' hover:text-[#EC8736]'> <li className='text-sm flex items-center justify-between'> Profile  <span>+</span></li></Link>
         <Link to= "/dashboard/lodge-complaints" className=' hover:text-[#EC8736]'><li className='text-sm flex items-center justify-between'> Lodge complaints <span>+</span></li></Link>
-        <Link to= "/" className=' hover:text-[#EC8736]'> <li className='text-sm flex items-center justify-between'> Notice board  <span>+</span></li></Link>
+        <Link to= "/dashboard/notice-board" className=' hover:text-[#EC8736]'> <li className='text-sm flex items-center justify-between'> Notice board  <span>+</span></li></Link>
        </ul>
     </div>
   )
