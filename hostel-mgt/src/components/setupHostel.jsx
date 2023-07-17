@@ -1,24 +1,46 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import axiosInstance from "../utils/helper";
+import { useToast } from "@chakra-ui/react";
 
 const SetupHostel = () => {
     const [data, setData] = useState({
         hostelId: "",
         block: "",
-        roomId: ""
+        roomNumber: ""
       });
-    
+
+      console.log(data)
+
+      const [hostels, setHostels] = useState([])
+
+     
       const [error, setError] = useState("");
       const [msg, setMsg] = useState("");
       const [success, setSuccess] = useState("");
       const navigate = useNavigate();
-      const location = useLocation()
+      const  toast = useToast();
+
+      const handleGender = async () =>{
+        const genderData = {
+          gender: "female"
+        }
+        try {
+          const url = "https://hostel-mgt.onrender.com/api/hostel/fetch-hostels"
+        const res = await axios.post(url, {...genderData})
+            console.log(res.data.data[0])
+            setHostels(res.data.data)
+        } catch (error) {
+          console.log(error)
+        }
+      }
 
       useEffect(()=>{
-console.log(location.state)
+        handleGender()
       },[])
     
+     
       const handleChange = ({ currentTarget: input }) => {
         setError("");
         setData({ ...data, [input.name]: input.value });
@@ -28,14 +50,30 @@ console.log(location.state)
         e.preventDefault();
         try {
           const url =
-            "https://hostel-mgt.onrender.com/api/auth/student/update-details";
-          const { data: res } = await axios.post(url, data);
+            "https://hostel-mgt.onrender.com/api/hostel/setup-hostel";
+          const { data: res } = await axiosInstance.post(url, data);
           if (res.success) {
             setMsg(res.message);
             setSuccess(true);
             setError("");
+            toast({
+              title: 'Success',
+              description:"Hostel Setup Successfully" ,
+              position:"top-right",
+              status: 'success',
+              duration: 9000,
+              isClosable: true,
+            });
           }
         } catch (error) {
+          toast({
+            title: 'Error',
+            description:error.response.data.message ,
+            position:"top-right",
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
           if (
             error.response &&
             error.response.status >= 400 &&
@@ -50,7 +88,7 @@ console.log(location.state)
         console.log(success, "success");
         if (success) {
           const timer = setTimeout(() => {
-            navigate("/register-cont");
+            navigate("/make-payment");
           }, 3000);
           return () => clearTimeout(timer);
         }
@@ -69,19 +107,18 @@ console.log(location.state)
               <br />
               <div>
                 <label className="mr-4">Choose Hostel:</label>
-                <select value={data.hostelId} className="border p-0.5 py-1" name="gender" id="gender">
+                <select value={data.hostelId}  onChange={handleChange} className="border p-0.5 py-1"  name="hostelId" id="hostelId">
                   <option value="choose option">Choose option</option>
-                  <option value="female">Female</option>
-                  <option value="male">Male</option>
+                  {hostels.map(hostel=>(<option value={hostel._id}  label={hostel.hostelName}/>))}
                 </select>
               </div>
               <div className="flex flex-col py-2">
                 <label>Block</label>
-                <input value={data.block}  onChange={handleChange} className="border p-0.5" type="tel" name="phoneNumber"/>
+                <input value={data.block}  onChange={handleChange} className="border p-0.5" type="text" name="block"/>
               </div>
               <div className="flex flex-col py-2">
                 <label>Room Number</label>
-                <input value={data.roomId}  onChange={handleChange} className="border p-0.5" type="text" name="nextOfKin" />
+                <input value={data.roomNumber}  onChange={handleChange} className="border p-0.5" type="text" name="roomNumber" />
               </div>
               {error && <div>{error}</div>}
               {msg && <div>{msg}</div>}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BiSolidEdit} from 'react-icons/bi'
 import {
   Table,
@@ -10,9 +10,38 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react";
+import axiosInstance from "../../utils/helper";
 
 
 const Rooms = () => {
+
+  const [ roomData, setRoomData] = useState("")
+
+  const [data, setData] = useState({
+    page: "",
+    hostelId:  localStorage.getItem('hostelId')
+  });
+
+  const handleSelect = ({ currentTarget: select }) => {
+    setData({ ...data, [select.name]: select.id });
+  };
+
+  const fetchData = async (e)=>{
+
+    e.preventDefault()
+    const url = "https://hostel-mgt.onrender.com/api/hostel/fetch-rooms"
+   const {data: res} =  await axiosInstance.post(url, data)
+    .then((res) => {
+      setRoomData(res.data);
+      console.log(res)
+    }).catch((err)=>{
+      console.log(err)
+    })
+
+  }
+
+
+
   return (
     <div className="w-full py-16 px-10 ">
       <div className="title">
@@ -24,20 +53,22 @@ const Rooms = () => {
       </div>
       <div className="mt-7 flex justify-between">
         <p>
-          Show{" "}
+          Page{" "}
           <select
+          onChange={handleSelect}
+          onClick={(e) => fetchData(e)}
             className="border border-black p-0.5 py-1 mr-5 ml-5"
             name="entries"
             id="entries"
           >
-            <option value="choose option">5</option>
-            <option value="female">10</option>
-            <option value="male">15</option>
+            <option value="choose option">1</option>
+            <option value="female">2</option>
+            <option value="male">3</option>
           </select>
           entries
         </p>
         <div>
-          <label className="mr-2" for="search">
+          <label className="mr-2">
             Search:
           </label>
           <input
@@ -61,7 +92,7 @@ const Rooms = () => {
             </Thead>
             <Tbody>
               <Tr>
-                <Td>inches</Td>
+                <Td>{roomData.data}</Td>
                 <Td>millimetres (mm)</Td>
                 <Td >25.4</Td>
                 <Td >25.4</Td>

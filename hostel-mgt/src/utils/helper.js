@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({
+ const axiosInstance =  axios.create({
     baseURL:"",
     headers:{
          Accept:"*/*",
-        "Content-Type": "multipart/form-data"
+        "Content-Type": "application/json"
     }
 })
 

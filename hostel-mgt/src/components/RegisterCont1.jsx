@@ -68,11 +68,12 @@ image.current.file = file
 
   // }
 
+
   useEffect(() => {
     console.log(success, "success");
     if (success) {
       const timer = setTimeout(() => {
-        navigate("/register-cont");
+        navigate("/setup-hostel");
       }, 3000);
       return () => clearTimeout(timer);
     }

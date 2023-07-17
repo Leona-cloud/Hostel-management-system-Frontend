@@ -1,24 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 import axiosInstance from "../utils/helper";
+import { useToast } from "@chakra-ui/react";
 
 const UploadCertificate = () => {
   const [image, setImage] = useState("");
-  const [url, setUrl] = useState("");
-  const uploadImage = () => {
+  const navigate = useNavigate();;
+  const  toast = useToast();
+
+  const uploadImage =  () => {
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "xaqimipi");
     data.append("cloud_name", "dehufiqyo");
-    fetch(" https://api.cloudinary.com/v1_1/dehufiqyo/image/upload", {
-      method: "post",
-      body: data,
-    })
-      .then((resp) =>{console.log(resp)})
-      .then((data) => {
-        setUrl(data.url);
+    axios.post(" https://api.cloudinary.com/v1_1/dehufiqyo/image/upload",
+     data,
+    )
+      .then( async(resp) =>{
+        const url =  "https://hostel-mgt.onrender.com/api/auth/student/upload-certificate"
+        const {data: res} = await axiosInstance.post(url, {file:resp.data.public_id});
+        toast({
+          title: 'Success',
+          description:"Upload successful" ,
+          position:"top-right",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        });
+        if(res.success === true){
+          navigate('/make-payment')
+        }
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>  toast({
+        title: 'Error',
+        description:err.response.data.message ,
+        position:"top-right",
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      }));
   };
 
   return (
@@ -39,10 +60,6 @@ const UploadCertificate = () => {
       <div >
         <button className="border w-full my-5 py-2 bg-black text-white hover:bg-slate-400" onClick={uploadImage}>Upload</button>
         </div>
-      <div>
-        <h1>Uploaded image will be displayed here</h1>
-       <img src= {url} alt=""/>
-      </div>
     </div>
        </div>
     </div>
