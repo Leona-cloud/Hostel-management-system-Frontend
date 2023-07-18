@@ -11,6 +11,7 @@ import axios from "axios";
 
 axiosInstance.interceptors.request.use((config)=>{
     const token = localStorage.getItem("access_token");
+    const student = localStorage.getItem("student")
     if(token){
         config.headers.Authorization = `Bearer ${token}`
     }

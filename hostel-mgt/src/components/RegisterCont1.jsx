@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import {  useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/helper";
+import axios from "axios";
 import { useToast } from "@chakra-ui/react";
 
 const RegisterCont1 = () => {
   const [data, setData] = useState({
-    image: "",
     gender: "",
     phoneNumber: "",
     department: "",
@@ -13,61 +13,54 @@ const RegisterCont1 = () => {
     nextOfKinPhoneNumber: "",
   });
 
-  const image = useRef(null)
+  const [image, setImage] = useState("");
   const [error, setError] = useState("");
   const [msg, setMsg] = useState("");
   const [success, setSuccess] = useState("");
   const  toast = useToast();
   const navigate = useNavigate();
-  console.log(data)
-
+ 
   const handleChange = ({ currentTarget: input }) => {
     setError("");
     setData({ ...data, [input.name]: input.value });
   };
 
-  const handleUpload=(e)=>{
-    const [file] = e.target.files
-console.log(file.name)
-image.current.file = file
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const url =
-        "https://hostel-mgt.onrender.com/api/auth/student/update-details";
-      const { data: res } = await axiosInstance.post(url, {...data});
-      if (res.success) {
-        setMsg(res.message);
-        setSuccess(true);
-        setError("");
-        navigate("/setup-hostel",{gender:data.gender})
-      }
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.message);
+  const uploadImage =  () => {
+    const imageData = new FormData();
+    imageData.append("file", image);
+    imageData.append("upload_preset", "xaqimipi");
+    imageData.append("cloud_name", "dehufiqyo");
+    axios.post(" https://api.cloudinary.com/v1_1/dehufiqyo/image/upload",
+    imageData,
+    )
+      .then( async(resp) =>{
+        console.log(resp)
+        const url =  "https://hostel-mgt.onrender.com/api/auth/student/update-details"
+        const {data: res} = await axiosInstance.post(url, {...data, studentImage:resp.data.url});
+        console.log(res, 'response')
         toast({
-          title: 'Error',
-          description:error.response.data.message ,
+          title: 'Success',
+          description:"Upload successful" ,
           position:"top-right",
-          status: 'error',
+          status: 'success',
           duration: 9000,
           isClosable: true,
-        })
-      }
-    }
+        });
+        if(res.success === true){
+          navigate('/setup-hostel')
+        }
+      })
+      .catch((err) =>  toast({
+        title: 'Error',
+        description:err.response.data.message ,
+        position:"top-right",
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      }));
   };
 
-  // const handleSelect = ()=>{
-
-  // }
-
+  
 
   useEffect(() => {
     console.log(success, "success");
@@ -85,7 +78,6 @@ image.current.file = file
       <div className="bg-gray-100 flex flex-col justify-center items-center  rounded-lg">
         <form
           className="max-w-[400px]  w-full max-auto bg-white p-7 rounded-lg"
-          onSubmit={handleSubmit}
         >
           <h2 className=" text-sm font-bold">Tell us more about you</h2>
           <p className="text-sm">Your information is secure.</p>
@@ -93,11 +85,9 @@ image.current.file = file
           <div>
             <label>Upload picture</label>
             <input
-              placeholder="picture"
-             ref={image}
-              onChange={handleUpload}
               type="file"
-              name="image"
+              name="studentImage"
+              onChange={(e) => setImage(e.target.files[0])}
             />
           </div>
           <div className="flex flex-col py-2">
@@ -106,7 +96,7 @@ image.current.file = file
           </div>
           <div>
             <label>Choose Gender:</label>
-            <select className="border p-0.5 py-1" name="gender" id="gender" onChange={handleChange}>
+            <select  value={data.gender}className="border p-0.5 py-1" name="gender" id="gender" onChange={handleChange}>
               <option value="choose option">Choose option</option>
               <option value="female">Female</option>
               <option value="male">Male</option>
@@ -127,7 +117,7 @@ image.current.file = file
           {error && <div>{error}</div>}
           {msg && <div>{msg}</div>}
           {}
-          <button className="border p-0.5 w-full my-5 py-2 bg-black text-white hover:bg-slate-400 " onClick={handleSubmit}>
+          <button type="button" className="border p-0.5 w-full my-5 py-2 bg-black text-white hover:bg-slate-400 " onClick={uploadImage}>
             Next
           </button>
         </form>

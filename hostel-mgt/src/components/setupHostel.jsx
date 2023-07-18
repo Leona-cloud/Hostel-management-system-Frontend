@@ -13,6 +13,8 @@ const SetupHostel = () => {
 
       console.log(data)
 
+      localStorage.setItem('hostelId', data.hostelId)
+
       const [hostels, setHostels] = useState([])
 
      
@@ -22,9 +24,13 @@ const SetupHostel = () => {
       const navigate = useNavigate();
       const  toast = useToast();
 
+      const gender = JSON.parse(localStorage.getItem('student')).gender
+      
+      console.log(gender, 'this one')
+
       const handleGender = async () =>{
         const genderData = {
-          gender: "female"
+          gender: gender
         }
         try {
           const url = "https://hostel-mgt.onrender.com/api/hostel/fetch-hostels"

@@ -32,7 +32,8 @@ const Login = () => {
         setMsg(res.message);
         setSuccess(true);
         setError("");
-        localStorage.setItem("access_token",res.data.accessToken)
+        localStorage.setItem("access_token",res.data.accessToken);
+        localStorage.setItem("student", JSON.stringify(res.data.student))
 
       }
     } catch (error) {
