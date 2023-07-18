@@ -31,7 +31,8 @@ const Wardenlogin = () => {
         setMsg(res.message);
         setSuccess(true);
         setError("");
-        localStorage.setItem("access_token",res.data.accessToken)
+        localStorage.setItem("access_token",res.data.accessToken);
+        localStorage.setItem("warden", JSON.stringify(res.data.warden))
 
       }
     } catch (error) {

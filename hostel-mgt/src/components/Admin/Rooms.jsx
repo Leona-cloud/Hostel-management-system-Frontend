@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BiSolidEdit} from 'react-icons/bi'
 import {
   Table,
@@ -15,32 +15,7 @@ import axiosInstance from "../../utils/helper";
 
 const Rooms = () => {
 
-  const [ roomData, setRoomData] = useState("")
-
-  const [data, setData] = useState({
-    page: "",
-    hostelId:  localStorage.getItem('hostelId')
-  });
-
-  const handleSelect = ({ currentTarget: select }) => {
-    setData({ ...data, [select.name]: select.id });
-  };
-
-  const fetchData = async (e)=>{
-
-    e.preventDefault()
-    const url = "https://hostel-mgt.onrender.com/api/hostel/fetch-rooms"
-   const {data: res} =  await axiosInstance.post(url, data)
-    .then((res) => {
-      setRoomData(res.data);
-      console.log(res)
-    }).catch((err)=>{
-      console.log(err)
-    })
-
-  }
-
-
+  
 
   return (
     <div className="w-full py-16 px-10 ">
@@ -51,32 +26,16 @@ const Rooms = () => {
         </p>
         <p className="text-sm font-sans:Noto Sans">ROOM DETAILS </p>
       </div>
-      <div className="mt-7 flex justify-between">
-        <p>
-          Page{" "}
-          <select
-          onChange={handleSelect}
-          onClick={(e) => fetchData(e)}
-            className="border border-black p-0.5 py-1 mr-5 ml-5"
-            name="entries"
-            id="entries"
-          >
-            <option value="choose option">1</option>
-            <option value="female">2</option>
-            <option value="male">3</option>
-          </select>
-          entries
-        </p>
-        <div>
-          <label className="mr-2">
-            Search:
+      <div className="mt-7 flex">
+      <label className="mr-2">
+            Page Number:
           </label>
           <input
-            className="border-2 border-black "
+            className="border border-black w-10"
             type="text"
-            placeholder="search"
+            placeholder="1"
           />
-        </div>
+       
       </div>
       <div className="mt-10">
         <TableContainer>
@@ -92,7 +51,7 @@ const Rooms = () => {
             </Thead>
             <Tbody>
               <Tr>
-                <Td>{roomData.data}</Td>
+                <Td></Td>
                 <Td>millimetres (mm)</Td>
                 <Td >25.4</Td>
                 <Td >25.4</Td>

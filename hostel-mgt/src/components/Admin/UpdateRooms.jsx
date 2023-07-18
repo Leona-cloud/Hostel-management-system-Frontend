@@ -26,7 +26,7 @@ const UpdateRooms = () => {
     e.preventDefault();
     try {
       const url = "https://hostel-mgt.onrender.com/api/hostel/add-new-room";
-      const { data: res } = await axiosInstance.post(url, data);
+      const { data: res } = await axiosInstance.post(url, {...data});
       if (res.success) {
         setMsg(res.message);
         setSuccess(true);
