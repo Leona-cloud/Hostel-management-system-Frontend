@@ -61,8 +61,9 @@ const SetupHostel = () => {
           if (res.success) {
             setMsg(res.message);
             setSuccess(true);
-            localStorage.setItem("student", JSON.stringify(res.data.student))
             setError("");
+            localStorage.setItem("student", JSON.stringify(res.data.student));
+            console.log(res.data.student)
             toast({
               title: 'Success',
               description:"Hostel Setup Successfully" ,
