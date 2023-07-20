@@ -47,6 +47,7 @@ const RegisterCont1 = () => {
           isClosable: true,
         });
         if(res.success === true){
+          console.log('here')
           navigate('/setup-hostel')
         }
       })
@@ -63,7 +64,7 @@ const RegisterCont1 = () => {
   
 
   useEffect(() => {
-    console.log(success, "success");
+   
     if (success) {
       const timer = setTimeout(() => {
         navigate("/setup-hostel");
