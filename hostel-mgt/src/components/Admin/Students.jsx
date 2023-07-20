@@ -28,6 +28,7 @@ const Students = () => {
   const fetchStudents = useCallback(async () => {
     setLoading(true);
     const hostelId = JSON.parse(localStorage.getItem("warden")).hostelId;
+    console.log(localStorage.getItem("warden"))
     try {
       const url = "https://hostel-mgt.onrender.com/api/hostel/fetch-students";
       const res = await axiosInstance.post(url, {

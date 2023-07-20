@@ -24,6 +24,8 @@ import Rooms from "./components/Admin/Rooms";
 import Students from "./components/Admin/Students";
 import UpdateRooms from "./components/Admin/UpdateRooms";
 import SetupHostel from "./components/setupHostel";
+import UpdateNoticeBoard from "./components/Admin/UpdateNoticeBoard"
+import VerifyStudent  from "./components/Admin/VerifyStudent";
 const App = () => {
   return (
     <ChakraProvider>
@@ -49,6 +51,8 @@ const App = () => {
         <Route path="overview" element={<AdminOverview />} />
         <Route path="rooms" element={<Rooms />} />
         <Route path="students" element={<Students />} />
+        <Route path="update-notice-board" element={<UpdateNoticeBoard/>}/>
+        <Route path="verify-student" element={<VerifyStudent/>}/>
       </Route>
       <Route path="make-payment" element={<MakePayment />} />
       <Route path="/*" element={<Home />} />

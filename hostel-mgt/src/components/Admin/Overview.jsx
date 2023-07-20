@@ -10,8 +10,8 @@ const AdminOverview = () => {
          </div>
 
          <div className='flex items-center gap-5  mt-10'>
-            <div className='border p-16'>Students</div>
-            <div className='border p-16'>Raise a complaint</div>
+            <div className='border p-16'><Link to='/admin-dashboard/verify-student'>Verify Student</Link></div>
+            <div className='border p-16'><Link to='/admin-dashboard/update-notice-board'>Notice Board</Link></div>
             <div className='border p-16'><Link to='/admin-dashboard/update-rooms'>Update Rooms</Link></div>
          </div>
     </div>

@@ -9,7 +9,7 @@ const Sidebar = () => {
   return (
     <div className=' text-white h-full py-5 px-6 w-[14 rem]'>
         <div className='name and avatar mt-5 mb-16 flex items-center justify-evenly w-full'>
-<img src= {student.studentImage} alt='avatar' className='w-6 h-6 rounded-full bg-red-600 mr-2'/>
+<img src= {student.image} alt='avatar' className='w-6 h-6 rounded-full bg-red-600 mr-2'/>
 <p className='text-xs'>Chisom@gmail.com</p>
 <RiArrowDropDownLine fontSize={24} className='cursor-pointer'/>
         </div>

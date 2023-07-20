@@ -19,7 +19,7 @@ const UploadCertificate = () => {
     )
       .then( async(resp) =>{
         const url =  "https://hostel-mgt.onrender.com/api/auth/student/upload-certificate"
-        const {data: res} = await axiosInstance.post(url, {file:resp.data.public_id});
+        const {data: res} = await axiosInstance.post(url, {file:resp.data.url});
         toast({
           title: 'Success',
           description:"Upload successful" ,
