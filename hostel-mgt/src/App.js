@@ -30,7 +30,7 @@ const App = () => {
          <Routes>
       <Route path="student-login" element={<Login />} />
       <Route path="warden-login" element={<Wardenlogin />} />
-      <Route path="Register" element={<Register />} />
+      <Route path="register" element={<Register />} />
       <Route path="/register-cont" element={<RegisterCont1 />} />
       <Route path="next-of-kin" element={<StudentNextOfKin />} />
       <Route path="upload-certificate" element={<UploadCertificate />} />

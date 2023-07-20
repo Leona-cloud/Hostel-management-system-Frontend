@@ -24,7 +24,7 @@ const Nav = () => {
                 <br/>
                 sed do eiusmod tempor incididunt ut labore</p>
                 <button className="border p-0.5 w-40 rounded-md my-5 py-2 bg-black text-white hover:bg-slate-400 ">
-                <a href="/">Login as a student</a>
+                <a href="/register">Register as a student</a>
               </button>
         </div>
         <div>
