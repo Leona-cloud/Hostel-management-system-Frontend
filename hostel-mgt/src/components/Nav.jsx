@@ -8,10 +8,10 @@ const Nav = () => {
       <div className=" shadow-md w-full fixed top-0 left-0">
         <div className="md:grid  py-2 justify-items-end">
           <nav className="mr-6">
-            <button className="mr-7 bg-black p-0.5 text-white hover:bg-slate-400 py-1 rounded-md">
+            <button className="mr-7 bg-white p-0.5 text-black hover:bg-slate-400 py-1 rounded-md">
               <a href="/student-login">Student Login</a>
             </button>
-            <button className="bg-black text-white hover:bg-slate-400 py-1 rounded-md">
+            <button className="bg-white text-black hover:bg-slate-400 py-1 rounded-md">
               <a href="/warden-login">Go to Admin</a>
             </button>
           </nav>
