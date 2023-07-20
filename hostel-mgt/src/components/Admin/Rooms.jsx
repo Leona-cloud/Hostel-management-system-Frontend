@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { BiSolidEdit} from 'react-icons/bi'
+import React, { useState, useEffect, useCallback } from "react";
+import { BiSolidEdit } from "react-icons/bi";
 import {
-  Table,
   Thead,
   Tbody,
   Tfoot,
@@ -9,13 +8,55 @@ import {
   Th,
   Td,
   TableContainer,
+  Spinner,
 } from "@chakra-ui/react";
 import axiosInstance from "../../utils/helper";
+import TableComponent from "../../container/TableComponent";
 
+const columns = ["BLOCK", "ROOM NUMBER", "No of Occupants", "VACANT SPACE(s)"];
+const dataIndex = ["block", "roomId", "occupants", "vacant"];
+// {/* <Td>{item.roomId}</Td>
+//                 <Td>{item.occupants.length}</Td>
+//                 <Td>{6 - item.occupants.length}</Td> */}
 
 const Rooms = () => {
+  const [query, setQuery] = useState({
+    page: 1,
+    pageSize: "10",
+  });
+  const [roomData, setRoomsData] = useState();
+  const [loading, setLoading] = useState(false);
 
-  
+  const fetchRooms = useCallback(async () => {
+    setLoading(true);
+    const hostelId = JSON.parse(localStorage.getItem("warden")).hostelId;
+    try {
+      const url = "https://hostel-mgt.onrender.com/api/hostel/fetch-rooms";
+      const res = await axiosInstance.post(url, {
+        hostelId,
+        ...query,
+      });
+      setRoomsData(res.data.data.rooms);
+      console.log(res.data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  }, [query]);
+
+  const handlePangeChange = (page, arg) => {
+    if (page === 0) return;
+    if (arg === "prev") {
+      setQuery((prev) => ({ ...prev, page: page - 1 }));
+    } else {
+      setQuery((prev) => ({ ...prev, page: page + 1 }));
+    }
+  };
+
+  useEffect(() => {
+    fetchRooms();
+  }, [fetchRooms]);
 
   return (
     <div className="w-full py-16 px-10 ">
@@ -27,61 +68,23 @@ const Rooms = () => {
         <p className="text-sm font-sans:Noto Sans">ROOM DETAILS </p>
       </div>
       <div className="mt-7 flex">
-      <label className="mr-2">
-            Page Number:
-          </label>
-          <input
-            className="border border-black w-10"
-            type="text"
-            placeholder="1"
-          />
-       
+        <label className="mr-2">Page Number:</label>
+        <input
+          className="border border-black w-10"
+          type="text"
+          placeholder="1"
+          value={query.page}
+        />
       </div>
       <div className="mt-10">
-        <TableContainer>
-          <Table variant="simple" size="sm">
-            <Thead className="bg-slate-300">
-              <Tr>
-                <Th>BLOCK</Th>
-                <Th>ROOM NUMBER</Th>
-                <Th>No of Occupants</Th>
-                <Th>VACANT SPACE(s)</Th>
-                <Th>Action</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              <Tr>
-                <Td></Td>
-                <Td>millimetres (mm)</Td>
-                <Td >25.4</Td>
-                <Td >25.4</Td>
-                <Td><BiSolidEdit fontSize={24} className='cursor-pointer'/></Td>
-              </Tr>
-              <Tr>
-                <Td>feet</Td>
-                <Td>centimetres (cm)</Td>
-                <Td >30.48</Td>
-                <Td >25.4</Td>
-                <Td><BiSolidEdit fontSize={24} className='cursor-pointer'/></Td>
-              </Tr>
-              <Tr>
-                <Td>feet</Td>
-                <Td>centimetres (cm)</Td>
-                <Td >25.4</Td>
-                <Td >25.4</Td>
-                <Td><BiSolidEdit fontSize={24} className='cursor-pointer'/></Td>
-              </Tr>
-              <Tr>
-                <Td>feet</Td>
-                <Td>centimetres (cm)</Td>
-                <Td >30.48</Td>
-                <Td >25.4</Td>
-                <Td><BiSolidEdit fontSize={24} className='cursor-pointer'/></Td>
-              </Tr>
-            </Tbody>
-            <Tfoot></Tfoot>
-          </Table>
-        </TableContainer>
+        <TableComponent
+          data={roomData}
+          prev={() => handlePangeChange(query?.page, "prev")}
+          next={() => handlePangeChange(query?.page, "next")}
+          loading={loading}
+          columns={columns}
+          dataIndex={dataIndex}
+        />
       </div>
     </div>
   );
