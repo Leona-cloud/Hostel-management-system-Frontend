@@ -96,7 +96,7 @@ const SetupHostel = () => {
         console.log(success, "success");
         if (success) {
           const timer = setTimeout(() => {
-            navigate("/make-payment");
+            navigate("/upload-certificate");
           }, 3000);
           return () => clearTimeout(timer);
         }
