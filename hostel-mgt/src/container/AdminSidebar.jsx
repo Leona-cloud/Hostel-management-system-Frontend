@@ -14,7 +14,7 @@ export const AdminSidebar = () => {
             <Link to= "/admin-dashboard/overview" className=' hover:text-[#EC8736]' > <li className='text-sm flex items-center justify-between' >Overview <span>+</span></li></Link>
             <Link to= "/admin-dashboard/rooms" className=' hover:text-[#EC8736]'> <li className='text-sm flex items-center justify-between'> Rooms  <span>+</span></li></Link>
             <Link to= "/admin-dashboard/students" className=' hover:text-[#EC8736]'><li className='text-sm flex items-center justify-between'> Students<span>+</span></li></Link>
-            <Link to= "/dashboard/notice-board" className=' hover:text-[#EC8736]'> <li className='text-sm flex items-center justify-between'> View Complaints <span>+</span></li></Link>
+            <Link to= "/admin-dashboard/view-complaints" className=' hover:text-[#EC8736]'> <li className='text-sm flex items-center justify-between'> View Complaints <span>+</span></li></Link>
            </ul>
         </div>
       )

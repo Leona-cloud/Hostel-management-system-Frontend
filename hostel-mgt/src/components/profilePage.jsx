@@ -28,7 +28,7 @@ const ProfilePage = () => {
         <p>Email: <span>{student.email}</span></p>
         </div>
         <div className="flex justify-between">
-          <img src= {student.studentImage} alt="avatar" className="w-full h-auto  bg-slate-200 mr-2" />
+          <img src= {student.image} alt="avatar" className="w-full h-auto  bg-slate-200 mr-2" />
         </div>
       </div>
     </div>

@@ -37,7 +37,7 @@ const TableComponent = ({ loading, data, next, prev, columns, dataIndex }) => {
                       {dataId === "occupants"
                         ? item[dataId].length
                         : dataId === "vacant"
-                        ? 6 - item["occupants"]
+                        ? 6 - item["occupants"].length
                         : item[dataId]}
                     </Td>
                   ))}

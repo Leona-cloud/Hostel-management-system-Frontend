@@ -11,8 +11,11 @@ const Nav = () => {
             <button className="mr-7 bg-white p-0.5 text-black hover:bg-slate-400 py-1 rounded-md">
               <a href="/student-login">Student Login</a>
             </button>
-            <button className="bg-white text-black hover:bg-slate-400 py-1 rounded-md">
+            <button className="bg-white mr-7 text-black hover:bg-slate-400 py-1 rounded-md">
               <a href="/warden-login">Go to Admin</a>
+            </button>
+            <button className="bg-white text-black hover:bg-slate-400 py-1 rounded-md">
+              <a href="/dsa-login">Go to Dsa</a>
             </button>
           </nav>
         </div>

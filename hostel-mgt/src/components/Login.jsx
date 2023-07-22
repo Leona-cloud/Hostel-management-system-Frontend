@@ -51,7 +51,7 @@ const Login = () => {
     console.log(success, "success");
     if (success) {
       const timer = setTimeout(() => {
-        navigate("/register-cont");
+        navigate("/dashboard/overview");
       }, 3000);
       return () => clearTimeout(timer);
     }
