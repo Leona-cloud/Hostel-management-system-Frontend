@@ -37,8 +37,8 @@ const RegisterCont1 = () => {
         console.log(resp)
         const url =  "https://hostel-mgt.onrender.com/api/auth/student/update-details"
         const {data: res} = await axiosInstance.post(url, {...data, studentImage:resp.data.url});
-        console.log(res, 'response')
-        localStorage.setItem("student",res.data.student)
+        console.log(res.data.data.student, 'response')
+        localStorage.setItem("student",res.data.data.student)
         toast({
           title: 'Success',
           description:"Upload successful" ,
