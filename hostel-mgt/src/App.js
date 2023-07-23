@@ -28,6 +28,7 @@ import UpdateNoticeBoard from "./components/Admin/UpdateNoticeBoard";
 import VerifyStudent from "./components/Admin/VerifyStudent";
 import ViewComplaints from "./components/Admin/ViewComplaints";
 import DsaLogin from "./components/Admin/DsaLogin";
+import EvictStudent from "./components/Admin/EvictStudent";
 
 const App = () => {
   return (
@@ -58,6 +59,7 @@ const App = () => {
           <Route path="update-notice-board" element={<UpdateNoticeBoard />} />
           <Route path="verify-student" element={<VerifyStudent />} />
           <Route path="view-complaints" element={<ViewComplaints />} />
+          <Route path="evict-student" element={<EvictStudent />} />
         </Route>
         <Route path="make-payment" element={<MakePayment />} />
         <Route path="/*" element={<Home />} />

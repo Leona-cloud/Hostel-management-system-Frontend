@@ -43,8 +43,6 @@ const ViewComplaints = () => {
               <p className="font-semibold bg-slate-200">
                 Matric-No:<span>{hostel.studentMatricNo}</span>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RoomNo:{hostel.roomNo}
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                Title:{hostel.title}
               </p>
             </div>
             <div className=" border h-20">{hostel.body}</div>

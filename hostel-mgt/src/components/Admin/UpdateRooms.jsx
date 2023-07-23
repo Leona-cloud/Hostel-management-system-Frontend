@@ -90,22 +90,10 @@ const UpdateRooms = () => {
         <br/>
         <input value={data.block} onChange={handleChange}  className='border w-80' type='text' name='block'></input>       
       </div>
-
-      <div className='mt-10 flex gap-x-20'>
-        <div>
-      <p className="font-semibold">Available for rent.</p>
-        <p className="text-[#475569] text-sm mb-7 ">
-        Turning this on means there is vacancy in the room. 
-        </p>
-        </div>
-        <div className='flex justify-evensize'>
-        <BsToggleOff  size={40} color='gray-300'/>
-        </div>
-      </div>
       {error && <div>{error}</div>}
           {msg && <div>{msg}</div>}
           {}
-      <button   className='border w-80 my-5 py-2 bg-black text-white hover:bg-slate-400 '>Add Room</button>
+      <button   className='border mt-6 w-80 my-5 py-2 bg-black text-white hover:bg-slate-400 '>Add Room</button>
       </form>
   
     </div>

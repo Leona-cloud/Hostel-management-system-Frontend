@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useToast } from "@chakra-ui/react";
+
 
 const DsaLogin = () => {
     const [data, setData] = useState({
@@ -13,6 +15,8 @@ const DsaLogin = () => {
       const [msg, setMsg] = useState("");
       const [success, setSuccess] = useState("");
       const navigate = useNavigate();
+      const  toast = useToast();
+
     
       const handleChange = ({ currentTarget: input }) => {
         setError("");
@@ -23,17 +27,33 @@ const DsaLogin = () => {
       const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const url = "https://hostel-mgt.onrender.com/api/auth/warden/login";
+          const url = "https://hostel-mgt.onrender.com/api/auth/dsa/login";
           const { data: res } = await axios.post(url, data);
           if (res.success) {
             setMsg(res.message);
             setSuccess(true);
             setError("");
             localStorage.setItem("access_token",res.data.accessToken);
-            localStorage.setItem("warden", JSON.stringify(res.data.warden))
+            localStorage.setItem("dsa", JSON.stringify(res.data.warden));
+            toast({
+              title: 'Success',
+              description:"User logged in successfully" ,
+              position:"top-right",
+              status: 'success',
+              duration: 9000,
+              isClosable: true,
+            });
     
           }
         } catch (error) {
+          toast({
+            title: 'Error',
+            description:error.message ,
+            position:"top-right",
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
           if (
             error.response &&
             error.response.status >= 400 &&

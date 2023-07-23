@@ -12,7 +12,6 @@ const Overview = () => {
          <div className='flex items-center gap-5 justify-center mt-10'>
             <div className='border p-8'> <Link to='/dashboard/notice-board'>Notice Board</Link></div>
             <div className='border p-8'> <Link to='/dashboard/lodge-complaints'>Raise a complaint</Link></div>
-            <div className='border p-8'>Phone directory</div>
          </div>
     </div>
   )

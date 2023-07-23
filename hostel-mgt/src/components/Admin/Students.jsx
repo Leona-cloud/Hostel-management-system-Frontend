@@ -14,8 +14,8 @@ import { Button, ButtonGroup } from "@chakra-ui/react";
 import axiosInstance from "../../utils/helper";
 import TableComponent from "../../container/TableComponent";
 
-const columns = ["Department", "ROOM NUMBER", "Gender", "Phone", "Status"];
-const dataIndex = ["department", "roomNumber", "gender", "phoneNumber", "status"];
+const columns = ["Department", "Block", "ROOM NUMBER", "Gender", "Phone", "Status"];
+const dataIndex = ["department",  "block", "roomNumber", "gender", "phoneNumber", "status"];
 
 const Students = () => {
   const [query, setQuery] = useState({
