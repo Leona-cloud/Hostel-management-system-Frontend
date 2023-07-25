@@ -45,7 +45,7 @@ const NoticeBoard = () => {
         <div className=" border mb-8">
         <div className=" border">
           <p className="font-semibold bg-slate-200">
-            Title:{hostel.body}
+            Title:{hostel.heading}
           </p>
         </div>
         <div className=" border h-20">{hostel.body}</div>

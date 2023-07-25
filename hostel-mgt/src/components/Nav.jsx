@@ -15,7 +15,7 @@ const Nav = () => {
               <a href="/warden-login">Go to Admin</a>
             </button>
             <button className="bg-white text-black hover:bg-slate-400 py-1 rounded-md">
-              <a href="/dsa-login">Go to Dsa</a>
+              <a href="/dsa-login">Go to DSA</a>
             </button>
           </nav>
         </div>

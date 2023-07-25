@@ -25,6 +25,7 @@ const SetupHostel = () => {
       const  toast = useToast();
 
       const gender = JSON.parse(localStorage.getItem('student')).gender
+    
       
       console.log(gender, 'this one')
 

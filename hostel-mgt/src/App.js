@@ -29,6 +29,9 @@ import VerifyStudent from "./components/Admin/VerifyStudent";
 import ViewComplaints from "./components/Admin/ViewComplaints";
 import DsaLogin from "./components/Admin/DsaLogin";
 import EvictStudent from "./components/Admin/EvictStudent";
+import DsaDashboardShell from "./container/DsaDashboardShell";
+import EvictedStudents from "./components/Admin/EvictedStudents";
+import GenerateRoomReport from "./components/Admin/GenerateRoomReport";
 
 const App = () => {
   return (
@@ -60,6 +63,10 @@ const App = () => {
           <Route path="verify-student" element={<VerifyStudent />} />
           <Route path="view-complaints" element={<ViewComplaints />} />
           <Route path="evict-student" element={<EvictStudent />} />
+        </Route>
+        <Route path="/dsa-dashboard" element={<DsaDashboardShell />}>
+        <Route path="evicted-student" element={<EvictedStudents />} />
+        <Route path="report" element={<GenerateRoomReport />} />
         </Route>
         <Route path="make-payment" element={<MakePayment />} />
         <Route path="/*" element={<Home />} />
