@@ -68,7 +68,7 @@ const DsaLogin = () => {
         console.log(success, "success");
         if (success) {
           const timer = setTimeout(() => {
-            navigate("/admin-dashboard/overview");
+            navigate("/dsa-dashboard");
           }, 3000);
           return () => clearTimeout(timer);
         }
